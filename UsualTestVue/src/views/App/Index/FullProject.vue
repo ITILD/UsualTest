@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div>test!!!!!!!!!!!!!!!</div>
+  <div>testproject!!!!!!!!!!!!!!!</div>
 </template>
 
 <script >
@@ -14,6 +14,8 @@ export default {
           onBeforeMount(() => {})
           //组件挂载到页面之后执行
           onMounted(() => {})
+
+          console.log('testproject')
           return {
               object,
           }

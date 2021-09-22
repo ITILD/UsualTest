@@ -15,7 +15,16 @@ const router = createRouter({
   history: routerHistory,
   routes: [{
       path: '',
-      component: Index,
+      component: Index,      
+      children: [{
+        path: '',
+        name: 'FullList',
+        component: () =>
+          import(
+            '../views/App/Index/FullProject.vue'
+          ),
+      }
+    ],
     },
     {
       path: '/EasyCAD',

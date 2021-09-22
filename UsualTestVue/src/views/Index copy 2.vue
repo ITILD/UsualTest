@@ -1,16 +1,8 @@
 <template>
   <!-- // https://2x.antdv.com/components/tree-cn#components-tree-demo-switcher-icon -->
 
-<!-- 控制 -->
-  <div class="qk_z2 qk_fullscreen">
-    <a-button ghost  @click="showDrawer" >
-      <!-- <RightSquareTwoTone  twoToneColor="#52c41a" /> -->
-      <template #icon><RightSquareTwoTone  twoToneColor="#52c41a"/></template>
-      Open
-    </a-button>
-    <div class="icons-list">
-
-  </div>
+  <div class="index_box qk_fullscreen">
+    <a-button  ghost @click="showDrawer">Open</a-button>
     <a-drawer
       placement="left"
       :closable="false"
@@ -51,15 +43,12 @@
       </div>
     </a-drawer>
   </div>
-  <div class="qk_z1 qk_fullscreen blueTest">
-    <router-view />
-  </div>
 </template>
 <script>
 import { defineComponent, ref, watch } from 'vue'
-import { RightSquareTwoTone   } from '@ant-design/icons-vue'
-import { Info } from './Info'
+import { SearchOutlined } from '@ant-design/icons-vue';
 
+</script>
 const dataList = []
 
 //genData  转 list dataList
@@ -78,7 +67,104 @@ const generateList = (data) => {
     }
   }
 }
-const genData =Info.workList
+const genData = [
+  {
+    title: '0-0',
+    key: '0-0',
+    children: [
+      {
+        title: 'test',
+        key: '0-0-0',
+        children: [
+          {
+            title: '0-0-0-0test',
+            key: '0-0-0-0'
+          },
+          {
+            title: '0-0-0-1test',
+            key: '0-0-0-1'
+          },
+          {
+            title: '0-0-0-2',
+            key: '0-0-0-2'
+          }
+        ]
+      },
+      {
+        title: '0-0-1',
+        key: '0-0-1',
+        children: [
+          {
+            title: '0-0-1-0',
+            key: '0-0-1-0'
+          },
+          {
+            title: '0-0-1-1',
+            key: '0-0-1-1'
+          },
+          {
+            title: '0-0-1-2',
+            key: '0-0-1-2'
+          }
+        ]
+      },
+      {
+        title: '0-0-2',
+        key: '0-0-2'
+      }
+    ]
+  },
+  {
+    title: '0-1',
+    key: '0-1',
+    children: [
+      {
+        title: '0-1-0',
+        key: '0-1-0',
+        children: [
+          {
+            title: '0-1-0-0',
+            key: '0-1-0-0'
+          },
+          {
+            title: '0-1-0-1',
+            key: '0-1-0-1'
+          },
+          {
+            title: '0-1-0-2',
+            key: '0-1-0-2'
+          }
+        ]
+      },
+      {
+        title: '0-1-1',
+        key: '0-1-1',
+        children: [
+          {
+            title: '0-1-1-0',
+            key: '0-1-1-0'
+          },
+          {
+            title: '0-1-1-1',
+            key: '0-1-1-1'
+          },
+          {
+            title: '0-1-1-2',
+            key: '0-1-1-2'
+          }
+        ]
+      },
+      {
+        title: '0-1-2',
+        key: '0-1-2'
+      }
+    ]
+  },
+  {
+    title: '0-2',
+    key: '0-2'
+  }
+]
 generateList(genData)
 
 const getParentKey = (key, tree) => {
@@ -103,7 +189,6 @@ const getParentKey = (key, tree) => {
 console.log(dataList, genData)
 
 export default defineComponent({
-  components:{RightSquareTwoTone  },
   setup() {
     // ******************抽屉
     const visibleDraw = ref(false)
@@ -165,20 +250,15 @@ export default defineComponent({
       autoExpandParent,
       gData,
       onExpand,
-
+      SearchOutlined//按钮
     }
   }
 })
 </script>
 <style>
-.redTest{
-  /* width: 100%;
-  height: 100%; */
-  background-color: rgba(194, 4, 77, 0.603);
-}
-.blueTest{
-  /* width: 100%;
-  height: 100%; */
-  background-color: rgba(4, 33, 194, 0.603);
+.index_box {
+  width: 100%;
+  height: 100%;
+  background-color: aliceblue;
 }
 </style>
