@@ -1,26 +1,43 @@
-<!--  -->
 <template>
-  <div>testproject!!!!!!!!!!!!!!!</div>
+  <!-- accordion唯一展开 -->
+  <a-collapse v-model:activeKey="activeKey" :accordion="false">
+    <a-collapse-panel
+      v-for="item in workList"
+      :key="item.key"
+      :header="item.title + '  ' + item.abstract"
+      :disabled="item.disabled"
+    >
+      <p>{{ item.title }}</p>
+    </a-collapse-panel>
+  </a-collapse>
 </template>
+<script>
+import { defineComponent, ref, watch } from 'vue'
+import { Info } from '../../Info'
+const workList = Info.workList
 
-<script >
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
-export default {
-    name: '',
-      setup() {
-          //开始创建组件
-          const object = reactive({ foo: 'bar' })
-          //组件挂载页面之前执行
-          onBeforeMount(() => {})
-          //组件挂载到页面之后执行
-          onMounted(() => {})
-
-          console.log('testproject')
-          return {
-              object,
-          }
-      }
-  };
+export default defineComponent({
+  setup() {
+    const text = `test.`  
+    // const activeKey = ref(['1']);
+    let activeKey = ref([])
+    // watch(activeKey, val => {
+    //   console.log(val);
+    // });
+    let arrayTemp = []
+    for (let index = 0; index < workList.length; index++) {
+      const element = workList[index]
+      arrayTemp.push(element.key)
+    }
+    setTimeout(() => {
+      // 内部set函数
+      activeKey.value = arrayTemp
+    }, 500)
+    return {
+      text,
+      activeKey,
+      workList
+    }
+  }
+})
 </script>
-<style scoped>
-</style>

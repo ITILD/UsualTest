@@ -1,16 +1,11 @@
 <template>
   <!-- // https://2x.antdv.com/components/tree-cn#components-tree-demo-switcher-icon -->
 
-<!-- 控制 -->
-  <div class="qk_z2 qk_fullscreen">
-    <a-button ghost  @click="showDrawer" >
-      <!-- <RightSquareTwoTone  twoToneColor="#52c41a" /> -->
-      <template #icon><RightSquareTwoTone  twoToneColor="#52c41a"/></template>
-      Open
-    </a-button>
-    <div class="icons-list">
-
-  </div>
+  <!-- 控制 -->
+  <div class="qk_z2 qk_fullscreen click_none">
+    <!-- <a-button ghost @click="showDrawer"><template #icon><RightSquareTwoTone twoToneColor="#52c41a" /></template>Open</a-button> -->
+    <div class="icons-list"></div>
+    <!-- 抽屉 z-index默认1000 -->
     <a-drawer
       placement="left"
       :closable="false"
@@ -57,9 +52,9 @@
 </template>
 <script>
 import { defineComponent, ref, watch } from 'vue'
-import { RightSquareTwoTone   } from '@ant-design/icons-vue'
+import { RightSquareTwoTone } from '@ant-design/icons-vue'
 import { Info } from './Info'
-
+import { ControlDefault } from '../api/Control/ControlDefault.js'
 const dataList = []
 
 //genData  转 list dataList
@@ -78,7 +73,7 @@ const generateList = (data) => {
     }
   }
 }
-const genData =Info.workList
+const genData = Info.workList
 generateList(genData)
 
 const getParentKey = (key, tree) => {
@@ -103,7 +98,7 @@ const getParentKey = (key, tree) => {
 console.log(dataList, genData)
 
 export default defineComponent({
-  components:{RightSquareTwoTone  },
+  components: { RightSquareTwoTone },
   setup() {
     // ******************抽屉
     const visibleDraw = ref(false)
@@ -154,6 +149,8 @@ export default defineComponent({
 
       // autoExpandParent.value = true
     })
+    // 控制
+    ControlDefault.index(visibleDraw)
 
     return {
       visibleDraw,
@@ -164,19 +161,18 @@ export default defineComponent({
       searchValue,
       autoExpandParent,
       gData,
-      onExpand,
-
+      onExpand
     }
   }
 })
 </script>
 <style>
-.redTest{
+.redTest {
   /* width: 100%;
   height: 100%; */
   background-color: rgba(194, 4, 77, 0.603);
 }
-.blueTest{
+.blueTest {
   /* width: 100%;
   height: 100%; */
   background-color: rgba(4, 33, 194, 0.603);
