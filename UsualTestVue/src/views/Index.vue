@@ -150,6 +150,7 @@ export default defineComponent({
       // autoExpandParent.value = true
     })
     // 控制
+    ControlDefault.debuggerStart = true 
     ControlDefault.index(visibleDraw)
 
     return {
