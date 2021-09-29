@@ -24,37 +24,40 @@
           :auto-expand-parent="autoExpandParent"
           :tree-data="gData"
           @expand="onExpand"
+          @select="selectThis"
           show-line
           show-icon
         >
           <template #title="{ title }">
-            <!-- 如果包含   则部分变红 -->
-            <span v-if="title.indexOf(searchValue) > -1">
-              <span style="color: #000">{{
-                title.substr(0, title.indexOf(searchValue))
-              }}</span>
-              <span style="color: #40a9ff; font-weight: bold">{{
-                searchValue
-              }}</span>
-              <span style="color: #000">{{
-                title.substr(title.indexOf(searchValue) + searchValue.length)
-              }}</span>
-            </span>
-            <span v-else>{{ title }}</span>
+            <router-link to="/ChidProject">
+              <!-- 如果包含   则部分变红 -->
+              <span v-if="title.indexOf(searchValue) > -1">
+                <span style="color: #000">{{
+                  title.substr(0, title.indexOf(searchValue))
+                }}</span>
+                <span style="color: #40a9ff; font-weight: bold">{{
+                  searchValue
+                }}</span>
+                <span style="color: #000">{{
+                  title.substr(title.indexOf(searchValue) + searchValue.length)
+                }}</span>
+              </span>
+              <span v-else>{{ title }}</span>
+            </router-link>
           </template>
         </a-tree>
       </div>
     </a-drawer>
   </div>
-  <div class="qk_z1 qk_fullscreen blueTest">
+  <div class="qk_z0 qk_fullscreen blueTest">
     <router-view />
   </div>
 </template>
 <script>
 import { defineComponent, ref, watch } from 'vue'
 import { RightSquareTwoTone } from '@ant-design/icons-vue'
-import { Info } from './Info'
-import { ControlDefault } from '../api/Control/ControlDefault.js'
+import { IndexInfo } from '../data/setting/IndexInfo.js'
+import { ControlDefault } from '../api/AppUsual/Control/ControlDefault.js'
 const dataList = []
 
 //genData  转 list dataList
@@ -73,7 +76,7 @@ const generateList = (data) => {
     }
   }
 }
-const genData = Info.workList
+const genData = IndexInfo.workList
 generateList(genData)
 
 const getParentKey = (key, tree) => {
@@ -149,8 +152,13 @@ export default defineComponent({
 
       // autoExpandParent.value = true
     })
+    // function(selectedKeys, e:{selected: bool, selectedNodes, node, event})
+    const selectThis = (selectedKeys, e) => {
+      console.log(selectedKeys, e, e.node)
+    }
+
     // 控制
-    ControlDefault.debuggerStart = true 
+    ControlDefault.debuggerStart = true
     ControlDefault.index(visibleDraw)
 
     return {
@@ -162,7 +170,8 @@ export default defineComponent({
       searchValue,
       autoExpandParent,
       gData,
-      onExpand
+      onExpand,
+      selectThis
     }
   }
 })

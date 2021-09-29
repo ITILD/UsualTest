@@ -2,14 +2,21 @@ import {
   createRouter,
   createWebHistory
 } from 'vue-router'
+import { IndexInfo } from '../data/setting/IndexInfo.js'
 
 // import HelloWorld from '../components/HelloWorld.vue'
 import Index from '../views/Index.vue'
+// import Index1 from '../views/App/GL/Cesium/CesiumStart.vue'
+import Index1 from '../views/App/GL/Cesium/CesiumTest.vue'
 const routerHistory = createWebHistory()
 
 // createWebHashHistory hash 路由
 // createWebHistory history 路由
 // createMemoryHistory 带缓存 history 路由
+const routes = []
+
+
+// let a = [Info.]
 
 const router = createRouter({
   history: routerHistory,
@@ -18,12 +25,21 @@ const router = createRouter({
       component: Index,      
       children: [{
         path: '',
-        name: 'FullList',
+        name: 'FullProject',
+        component: Index1,
+        // component: () =>
+        //   import(
+        //     '../views/App/Index/FullProject.vue'
+        //   ),
+      },
+      {
+        path: 'ChidProject',
+        name: 'ChidProject',
         component: () =>
           import(
-            '../views/App/Index/FullProject.vue'
+            '../views/App/Index/ChidProject.vue'
           ),
-      }
+      },
     ],
     },
     {

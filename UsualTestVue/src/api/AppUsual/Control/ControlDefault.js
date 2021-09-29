@@ -42,7 +42,7 @@ class ControlDefault {
       event.preventDefault()
       console.log(event)
     }
-    ControlDefault.defaultMouseEvent()
+    ControlDefault.debuggerStart||ControlDefault.defaultMouseEvent()
   }
 
   /**
@@ -84,7 +84,7 @@ class ControlDefault {
     document.onkeydown = onkeydownFunc
 
     // 右键
-    ControlDefault.defaultMouseEvent()
+    ControlDefault.debuggerStart||ControlDefault.defaultMouseEvent()
   }
   /**
    * 除tab的基础输入
