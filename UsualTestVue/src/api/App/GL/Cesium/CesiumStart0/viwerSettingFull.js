@@ -4,8 +4,6 @@ let viwerSettingFull = {
     title: '场景参数',
     depthTestAgainstTerrain:true,//深度检测
     fxaa:true,//抗锯齿
-    baimo: false,
-    baimoConfig: {id:'baimo',type:'3dtiles',url: 'http://192.168.4.4:12580/Model/fangwu/tileset.json'},
     cameraNow:{
       h: 0,
       heading: 0,
@@ -70,18 +68,15 @@ let viwerSettingFull = {
     timeListen: false,
     timeReturn: null,
   },
-  // --------------------------------------------LOD---------------------------------------------------
   spatialTree: {
     title: 'spatialTree',
     simple2D: false,
-    CameraCenter2D: false,
-    simple3D: false,
     quadtree: false,
+    simple3D: false,
     geohash: false,
     octree: false,
     ocGeo: false,
   },
-
 }
 
 export { viwerSettingFull }
