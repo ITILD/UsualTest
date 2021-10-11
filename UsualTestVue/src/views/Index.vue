@@ -154,7 +154,7 @@ export default defineComponent({
     })
     // function(selectedKeys, e:{selected: bool, selectedNodes, node, event})
     const selectThis = (selectedKeys, e) => {
-      console.log(selectedKeys, e, e.node)
+      console.log('selectThis',selectedKeys, e, e.selectedNodes[0].props,e.selectedNodes[0].props.dataRef.title) 
     }
 
     // 控制

@@ -81,15 +81,6 @@ let viwerSettingFull = {
     octree: false,
     ocGeo: false,
   },
-  // --------------------------------------------动态房屋---------------------------------------------------
-  LODBuilding:{
-    title: 'LODBuilding',
-    baimo: false,
-    baimoConfig: {id:'baimo',type:'3dtiles',url: 'http://192.168.4.4:12580/Model/fangwu/tileset.json'},
-    damage:false,//损伤
-    dynamicHole:false,
-    rockBuildiong:false//动态房屋
-  }
 
 }
 

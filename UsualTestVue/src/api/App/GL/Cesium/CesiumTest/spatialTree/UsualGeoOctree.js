@@ -1,11 +1,15 @@
+// UsualGeoOctree
 // CesiumPrimitivesProvider_CameraCenter2D.js
 /**
+ * 基于空间八叉树和Geohash
+ * 编码拟采用字符串或莫顿码
+ * 视锥体
  * 分块请求渲染几何及模型
  * 几何集中渲染 模型实例化渲染   
  * 状态管理机制
  */
-//TODO 加载几何 相机中心改为视锥体？？？
-class CesiumPrimitivesProvider_CameraCenter2D {
+
+class UsualGeoOctree {
 
   /**
    * 分割与取图块分离!!!  切割坐标与OSM一致 经纬度计算（弧度）
@@ -377,4 +381,8 @@ class CesiumPrimitivesProvider_CameraCenter2D {
   }
 }
 
-export { CesiumPrimitivesProvider_CameraCenter2D };
+export { UsualGeoOctree };
+
+/**
+ * 
+ */

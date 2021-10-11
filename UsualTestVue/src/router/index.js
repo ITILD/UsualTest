@@ -33,6 +33,15 @@ const router = createRouter({
         //   ),
       },
       {
+        path: 'App/GL/Cesium/CesiumStart',
+        // path: '/App/GL/Cesium/CesiumStart',
+        name: 'CesiumStart',
+        component: () =>
+          import(
+            '../views/App/GL/Cesium/CesiumStart.vue'
+          ),
+      },
+      {
         path: 'ChidProject',
         name: 'ChidProject',
         component: () =>

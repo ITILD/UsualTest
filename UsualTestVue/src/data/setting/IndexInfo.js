@@ -4,10 +4,10 @@ let IndexInfo = {}
 IndexInfo.workList = [
   {
     
-    title: 'Root',
+    title: 'App',
     key: '0',
     completeness:0.01,//百分比完成度 >0开始包含路由可以跳转   否则灰色
-    abstract:'根节点-总述',
+    abstract:'测试App',
     children: [
       {
         title: 'Template',
@@ -36,13 +36,27 @@ IndexInfo.workList = [
         ]
       },
       {
-        title: '0-0-1',
-        key: '0-0-1',
+        title: 'GL',
+        completeness:0.01,
+        abstract:'图形相关',
+        key: '0-1',
         children: [
           {
-            abstract:'ccc',
-            title: '0-0-1-0',
-            key: '0-0-1-0'
+            abstract:'Cesium',
+            title: 'Cesium',
+            key: 'App/GL/Cesium/Index',
+            children: [
+              {
+                abstract:'ccc',
+                title: 'CesiumStart',
+                key: 'App/GL/Cesium/CesiumStart',
+              },
+              {
+                abstract:'ccc',
+                title: 'CesiumTest',
+                key: 'App/GL/Cesium/CesiumTest',
+                
+              }]
           },
           {
             title: '0-0-1-1',
@@ -58,56 +72,7 @@ IndexInfo.workList = [
         title: '0-0-2',
         key: '0-0-2'
       },
-      {
-        title: '0-1',
-        key: '0-1',
-        children: [
-          {
-            title: '0-1-0',
-            key: '0-1-0',
-            children: [
-              {
-                title: '0-1-0-0',
-                key: '0-1-0-0'
-              },
-              {
-                title: '0-1-0-1',
-                key: '0-1-0-1'
-              },
-              {
-                title: '0-1-0-2',
-                key: '0-1-0-2'
-              }
-            ]
-          },
-          {
-            title: '0-1-1',
-            key: '0-1-1',
-            children: [
-              {
-                title: '0-1-1-0',
-                key: '0-1-1-0'
-              },
-              {
-                title: '0-1-1-1',
-                key: '0-1-1-1'
-              },
-              {
-                title: '0-1-1-2',
-                key: '0-1-1-2'
-              }
-            ]
-          },
-          {
-            title: '0-1-2',
-            key: '0-1-2'
-          }
-        ]
-      },
-      {
-        title: '0-21-1',
-        key: '0-21'
-      },
+
       {
         title: '0-22',
         key: '0-22'

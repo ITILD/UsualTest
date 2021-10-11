@@ -2,7 +2,6 @@ import { viwerSettingFull } from './viwerSettingFull.js'
 import * as cesiumPlugin from '../../../../../../public/lib/in/cesiumplugin.mjs'
 import { SceneInteraction } from './sceneParam/SceneInteraction.js'
 import { CesiumPrimitivesProvider_CameraCenter2D } from './spatialTree/CesiumPrimitivesProvider_CameraCenter2D.js'
-import { UsualGeoOctree } from './spatialTree/UsualGeoOctree.js'
 
 function datGuiControl(guiRoot, controlParams) {
   const gui_0_root = guiRoot
@@ -53,6 +52,15 @@ function datGuiControl(guiRoot, controlParams) {
     console.log('fxaa:' + value)
     viewer.scene.globe.fxaa = value
     viewer.scene.postProcessStages.fxaa.enabled = value
+  })
+  let baimo = gui_0_f0.add(viwerSettingFull.sceneParam, 'baimo') //是否开启抗锯齿
+  baimo.onChange((value) => {
+    console.log('baimo:' + value)
+    if (value) {
+      baseLayers.addLayer(viwerSettingFull.sceneParam.baimoConfig)
+    } else {
+      baseLayers.remove(viwerSettingFull.sceneParam.baimoConfig)
+    }
   })
 
   // --------------------------------------------场景监听---------------------------------------------------
@@ -134,13 +142,13 @@ function datGuiControl(guiRoot, controlParams) {
     console.log('onChange:' + value)
     // CesiumPrimitivesProvider_CameraCenter2D
     if (value) {
-      cameraCenter2DPrimitivesProvider =
-        new CesiumPrimitivesProvider_CameraCenter2D(viewer)
+      cameraCenter2DPrimitivesProvider = new CesiumPrimitivesProvider_CameraCenter2D(
+        viewer
+      )
       cameraCenter2DPrimitivesProvider.setParams(16, 2, 20000, [0, 30000])
       cameraCenter2DPrimitivesProvider.startListener() //矫正分块
     } else {
-      cameraCenter2DPrimitivesProvider &&
-        cameraCenter2DPrimitivesProvider.endListener()
+      cameraCenter2DPrimitivesProvider && cameraCenter2DPrimitivesProvider.endListener()
       cameraCenter2DPrimitivesProvider = null
     }
   })
@@ -155,125 +163,15 @@ function datGuiControl(guiRoot, controlParams) {
     console.log('onChange:' + value)
   })
   // 下拉框形式选择文案
-
   let octree = gui_0_f3.add(viwerSettingFull.spatialTree, 'octree')
   octree.onChange((value) => {
     console.log('onChange:' + value)
   })
   // 下拉框形式选择文案
-  // UsualGeoOctree
-  let usualGeoOctree
   let ocGeo = gui_0_f3.add(viwerSettingFull.spatialTree, 'ocGeo')
   ocGeo.onChange((value) => {
     console.log('onChange:' + value)
-    if (value) {
-      usualGeoOctree = new UsualGeoOctree(viewer)
-      usualGeoOctree.setParams(16, 2, 20000, [0, 30000])
-      usualGeoOctree.startListener() //矫正分块
-    } else {
-      usualGeoOctree && usualGeoOctree.endListener()
-      usualGeoOctree = null
-    }
   })
-
-  // --------------------------------------------动态房屋---------------------------------------------------
-  let gui_0_f4 = gui_0_root.addFolder(viwerSettingFull.LODBuilding.title)
-  // 基础设置 白膜
-  let baimo = gui_0_f4.add(viwerSettingFull.LODBuilding, 'baimo') //是否开启抗锯齿
-  baimo.onChange((value) => {
-    console.log('baimo:' + value)
-    viwerSettingFull.LODBuilding.baimo = value
-    if (value) {
-      baseLayers.addLayer(viwerSettingFull.LODBuilding.baimoConfig)
-  // 清除鼠标监听
-  handler&&handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
-    } else {
-      // viwerSettingFull.LODBuilding.damage = false //消除损伤
-      baseLayers.layersIdConfig.get(
-        viwerSettingFull.LODBuilding.baimoConfig.id
-      ) && baseLayers.remove(viwerSettingFull.LODBuilding.baimoConfig)
-    }
-  })
-  // 损伤变色 damage
-  // 下拉框形式选择文案
-  // let conditionsTest = []
- 
-  // let conditionsMax = 50000
-  // let conditionsLength = 50000/255
-  // for (let index = 0; index < conditionsMax/conditionsLength; index++) {
-  //   conditionsTest.push(['${地上面积} > '+ index*conditionsLength +' && (${地上面积} < '+(index+1)*conditionsLength +')', 'rgb('+index+', 0, 0)'])
-  // }
-
-  let damage = gui_0_f4.add(viwerSettingFull.LODBuilding, 'damage').listen()
-  damage.onChange((value) => {
-    console.log('damage:' + value)
-    if (!viwerSettingFull.LODBuilding.baimo) {
-      viwerSettingFull.LODBuilding.damage = false
-      alert('baimo false')
-      return
-    }
-    // 损伤变色
-    let baimoTileset = baseLayers.layersIdConfig.get(
-      viwerSettingFull.LODBuilding.baimoConfig.id
-    ).layer
-    console.log(baimoTileset)
-    if (value) {
-      baimoTileset.style = new Cesium.Cesium3DTileStyle({
-        // defines: {
-        //   material: "${feature['building:id']}",
-        // },
-        color: {
-          conditions: 
-          // conditionsTest
-          [
-            // objectid 	106887 		106884  
-            ['${objectid} == 106887 ', "color('red')"],
-            ['${objectid} == 106884 ', 'rgb(0, 0, 151)'],
-            // ['${id} > 40000.0 && (${id} < 4000000.0)', "color('red')"],
-            ['true', "color('black')"],
-
-            // ['${地上面积} > 0 && (${地上面积} < 2000.0)', 'rgb(102, 71, 151)'],
-            // ['${地上面积} > 2000.0 && (${地上面积} < 4000.0)', "color('red')"],
-
-
-
-            // ['${地上面积} > 2000', "color('yellow')"],
-            // ['${地上面积} < 2000', "color('red')"],
-            // ["${地上面积} <= 2000'", "color('green', 0.5)"],
-            // ['true', "color('red')"], // This is the else case
-          ],
-        },
-      })
-    } else {
-      baimoTileset.style = null
-    }
-  })
-
-  // 动态挖坑
-
-  // 动态添加动态房屋
-  let rockBuildiong = gui_0_f4.add(
-    viwerSettingFull.LODBuilding,
-    'rockBuildiong'
-  )
-  let rockBuildiongPrimitivesProvider
-  rockBuildiong.onChange((value) => {
-    console.log('onChange:' + value)
-    // CesiumPrimitivesProvider_rockBuildiong
-    if (value) {
-      rockBuildiongPrimitivesProvider =
-        new CesiumPrimitivesProvider_CameraCenter2D(viewer)
-      rockBuildiongPrimitivesProvider.setParams(14, 2, 20000, [0, 30000])
-      rockBuildiongPrimitivesProvider.startListener() //矫正分块
-    } else {
-      rockBuildiongPrimitivesProvider &&
-        rockBuildiongPrimitivesProvider.endListener()
-      rockBuildiongPrimitivesProvider = null
-    }
-  })
-
-  // --------------------------------------------图层---------------------------------------------------
-  // --------------------------------------------图层---------------------------------------------------
 }
 
 export { datGuiControl }
