@@ -5,7 +5,7 @@
   <div class="qk_z2 qk_fullscreen click_none">
     <!-- <a-button ghost @click="showDrawer"><template #icon><RightSquareTwoTone twoToneColor="#52c41a" /></template>Open</a-button> -->
     <div class="icons-list"></div>
-    <!-- 抽屉 z-index默认1000 -->
+    <!-- webgpu谷歌浏览器bug 抽屉css遮挡问题 -->
     <a-drawer
       placement="left"
       :closable="false"
@@ -29,21 +29,21 @@
           show-icon
         >
           <template #title="{ title }">
-            <router-link to="/ChidProject">
-              <!-- 如果包含   则部分变红 -->
-              <span v-if="title.indexOf(searchValue) > -1">
-                <span style="color: #000">{{
-                  title.substr(0, title.indexOf(searchValue))
-                }}</span>
-                <span style="color: #40a9ff; font-weight: bold">{{
-                  searchValue
-                }}</span>
-                <span style="color: #000">{{
-                  title.substr(title.indexOf(searchValue) + searchValue.length)
-                }}</span>
-              </span>
-              <span v-else>{{ title }}</span>
-            </router-link>
+            <!-- <router-link to="/ChidProject"> -->
+            <!-- 如果包含   则部分变红 -->
+            <span v-if="title.indexOf(searchValue) > -1">
+              <span style="color: #000">{{
+                title.substr(0, title.indexOf(searchValue))
+              }}</span>
+              <span style="color: #40a9ff; font-weight: bold">{{
+                searchValue
+              }}</span>
+              <span style="color: #000">{{
+                title.substr(title.indexOf(searchValue) + searchValue.length)
+              }}</span>
+            </span>
+            <span v-else>{{ title }}</span>
+            <!-- </router-link> -->
           </template>
         </a-tree>
       </div>
@@ -56,6 +56,8 @@
 <script>
 import { defineComponent, ref, watch } from 'vue'
 import { RightSquareTwoTone } from '@ant-design/icons-vue'
+import { useRouter } from 'vue-router'
+
 import { IndexInfo } from '../data/setting/IndexInfo.js'
 import { ControlDefault } from '../api/AppUsual/Control/ControlDefault.js'
 const dataList = []
@@ -153,13 +155,27 @@ export default defineComponent({
       // autoExpandParent.value = true
     })
     // function(selectedKeys, e:{selected: bool, selectedNodes, node, event})
+    const router = useRouter()
     const selectThis = (selectedKeys, e) => {
-      console.log('selectThis',selectedKeys, e, e.selectedNodes[0].props,e.selectedNodes[0].props.dataRef.title) 
+      // console.log(
+      //   'selectThis',
+      //   selectedKeys,
+      //   e,
+      //   e.selectedNodes[0].props,
+      //   e.selectedNodes[0].props.dataRef.title
+      // )
+
+      router.push({
+        // path:e.selectedNodes[0].props.dataRef.title
+        path:e.selectedNodes[0].props.dataRef.key
+        // path: '/App/GL/Cesium/CesiumStart'
+      })
+      // useRouter().push('/ChidProject')
     }
 
     // 控制
-    ControlDefault.debuggerStart = true
-    ControlDefault.index(visibleDraw)
+    // ControlDefault.debuggerStart = true
+    // ControlDefault.index(visibleDraw)
 
     return {
       visibleDraw,

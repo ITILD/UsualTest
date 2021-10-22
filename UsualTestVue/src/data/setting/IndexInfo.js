@@ -3,103 +3,110 @@ let IndexInfo = {}
 
 IndexInfo.workList = [
   {
-    
     title: 'App',
-    key: '0',
-    completeness:0.01,//百分比完成度 >0开始包含路由可以跳转   否则灰色
-    abstract:'测试App',
+    key: '/App/GL/Cesium/CesiumStart',
+    realPath:[true,''],
+    completeness: 0.01, //百分比完成度 >0开始包含路由可以跳转   否则灰色
+    abstract: '测试App',
     children: [
       {
         title: 'Template',
         key: '0-0',
-        completeness:0.01,
+        // completeness: 0.01,
         children: [
           {
-            abstract:'bbb',
+            abstract: 'bbb',
             title: '0-0-0-0test',
             key: '0-0-0-0',
             children: [
               {
-                abstract:'bbb',
+                abstract: 'bbb',
                 title: '0-0-0-0test',
-                key: '0-0-0-0'
-              }]
+                key: '0-0-0-0',
+              },
+            ],
           },
           {
             title: '0-0-0-1test',
-            key: '0-0-0-1'
+            key: '0-0-0-1',
           },
           {
             title: '0-0-0-2',
-            key: '0-0-0-2'
-          }
-        ]
+            key: '0-0-0-2',
+          },
+        ],
       },
       {
         title: 'GL',
-        completeness:0.01,
-        abstract:'图形相关',
+        // completeness: 0.01,
+        abstract: '图形相关',
         key: '0-1',
         children: [
           {
-            abstract:'Cesium',
+            abstract: 'Cesium',
             title: 'Cesium',
-            key: 'App/GL/Cesium/Index',
+            completeness: 0.01,
+            key: '/App/GL/Cesium/Index',
             children: [
               {
-                abstract:'ccc',
+                abstract: 'ccc',
+                completeness: 0.01,
                 title: 'CesiumStart',
-                key: 'App/GL/Cesium/CesiumStart',
+                key: '/App/GL/Cesium/CesiumStart',
               },
               {
-                abstract:'ccc',
+                abstract: 'ccc',
+                completeness: 0.01,
                 title: 'CesiumTest',
-                key: 'App/GL/Cesium/CesiumTest',
-                
-              }]
+                key: '/App/GL/Cesium/CesiumTest',
+              },
+            ],
           },
           {
-            title: '0-0-1-1',
-            key: '0-0-1-1'
+            abstract: 'Babylon',
+            title: 'Babylon',
+            completeness: 0.01,
+            key: '/App/GL/Babylon/Index',
+            children: [
+              {
+                abstract: 'ccc',
+                title: 'BabylonStart',
+                completeness: 0.01,
+                key: '/App/GL/Babylon/BabylonStart',
+              },
+              {
+                abstract: 'ccc',
+                title: 'BabylonTest',
+                key: '/App/GL/Babylon/BabylonTest',
+              }, {
+                abstract: 'ccc',
+                title: 'BabylonBatch',
+                completeness: 0.01,
+                key: '/App/GL/Babylon/BabylonBatch',
+              },
+               {
+                abstract: 'ccc',
+                title: 'BabylonBatch_WithTrangle',
+                completeness: 0.01,
+                key: '/App/GL/Babylon/BabylonBatch_WithTrangle',
+              },
+               {
+                abstract: 'ccc',
+                title: 'BabylonBatch_NoTrangle',
+                completeness: 0.01,
+                key: '/App/GL/Babylon/BabylonBatch_NoTrangle  ',
+              },
+              //  {
+              //   abstract: 'ccc',
+              //   title: 'BabylonTest',
+              //   key: '/App/GL/Babylon/BabylonTest',
+              // },
+            ],
           },
-          {
-            title: '0-0-1-2',
-            key: '0-0-1-2'
-          }
-        ]
-      },
-      {
-        title: '0-0-2',
-        key: '0-0-2'
-      },
-
-      {
-        title: '0-22',
-        key: '0-22'
-      },
-      {
-        title: '0-23',
-        key: '0-23'
-      },
-      {
-        title: '0-24',
-        key: '0-24'
-      },
-      {
-        title: '0-25',
-        key: '0-25'
-      },
-      {
-        title: '0-26',
-        key: '0-26'
-      },
-      {
-        title: '0-27',
-        key: '0-27'
-      } 
-    ]
+        ],
+      }
+    ],
   },
-
 ]
 
-export {IndexInfo}
+export { IndexInfo }

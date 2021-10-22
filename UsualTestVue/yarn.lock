@@ -49,6 +49,22 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     "to-fast-properties" "^2.0.0"
 
+"@babylonjs/core@^4.2.0", "@babylonjs/core@4.2.0":
+  "integrity" "sha512-sZQigPvMDc0pcgwlKvTF5gsMzGwT8gelQIOyxELrohdFu12pHGhIr61+yVxxq9tpCdzyYD9kS8LM0w2y+5ypkg=="
+  "resolved" "https://registry.npmjs.org/@babylonjs/core/-/core-4.2.0.tgz"
+  "version" "4.2.0"
+  dependencies:
+    "tslib" ">=1.10.0"
+
+"@babylonjs/serializers@^4.2.0":
+  "integrity" "sha512-VY5SONQaBSMusgNIwNz2k9L+YJK6oeJWLlQUdWvjszXp6/WVELh072S2gpMN0WX7mVonbCdcqXhJrKZgMV6t+g=="
+  "resolved" "https://registry.npmjs.org/@babylonjs/serializers/-/serializers-4.2.0.tgz"
+  "version" "4.2.0"
+  dependencies:
+    "@babylonjs/core" "4.2.0"
+    "babylonjs-gltf2interface" "4.2.0"
+    "tslib" ">=1.10.0"
+
 "@ctrl/tinycolor@^3.3.1":
   "integrity" "sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ=="
   "resolved" "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz"
@@ -74,6 +90,11 @@
   dependencies:
     "core-js" "^3.15.1"
     "nanopop" "^2.1.0"
+
+"@types/earcut@^2.1.1":
+  "integrity" "sha512-w8oigUCDjElRHRRrMvn/spybSMyX8MTkKA5Dv+tS1IE/TgmNZPqUYtvYBXGY8cieSE66gm+szeK+bnbxC2xHTQ=="
+  "resolved" "https://registry.npmjs.org/@types/earcut/-/earcut-2.1.1.tgz"
+  "version" "2.1.1"
 
 "@types/estree@*":
   "integrity" "sha1-Hgyqk2TT/M0pMcPtlv2+ql1MyoM="
@@ -251,9 +272,22 @@
   dependencies:
     "follow-redirects" "^1.14.0"
 
-"babylonjs@^4.2.0":
-  "integrity" "sha1-jw2VenJt5MBlkEsUwvQT9FUUXTg="
-  "resolved" "https://registry.nlark.com/babylonjs/download/babylonjs-4.2.0.tgz"
+"babylonjs-gltf2interface@4.2.0":
+  "integrity" "sha512-Fn/ThxwZWP9kEAqk+9FX9CAeF4ah/I0/8wzAZR8MQuYqlYpEfM+E/IztJ+4LoOOxQYMWNs5lgj8OXSkX0tqc4g=="
+  "resolved" "https://registry.npmjs.org/babylonjs-gltf2interface/-/babylonjs-gltf2interface-4.2.0.tgz"
+  "version" "4.2.0"
+
+"babylonjs-serializers@^4.2.0":
+  "integrity" "sha512-N5fmuZXBQaZZB9C9iyuu4SnnTvteAWt1iPyxW2aF8OUAaZ1uhyB6/cTsFS5/8ziXQ1GpR/gfKtk9QqB97Dn4ew=="
+  "resolved" "https://registry.npmjs.org/babylonjs-serializers/-/babylonjs-serializers-4.2.0.tgz"
+  "version" "4.2.0"
+  dependencies:
+    "babylonjs" "4.2.0"
+    "babylonjs-gltf2interface" "4.2.0"
+
+"babylonjs@^4.2.0", "babylonjs@4.2.0":
+  "integrity" "sha512-4hniJzWRkV0tDTTYGEHPk1lnfWn0HIw7HOvNWPK0rpUIbJooyeD9E5uVyHnslDedt0mtrA7QZu4i2Cz1DEmSsA=="
+  "resolved" "https://registry.npmjs.org/babylonjs/-/babylonjs-4.2.0.tgz"
   "version" "4.2.0"
 
 "big.js@^5.2.2":
@@ -366,6 +400,11 @@
   "integrity" "sha512-bvVTQe1lfaUr1oFzZX80ce9KLDlZ3iU+XGNE/bz9HnGdklTieqsbmsLHe+rT2XWqopvL0PckkYqN7ksmm5pe3w=="
   "resolved" "https://registry.npmjs.org/dom-scroll-into-view/-/dom-scroll-into-view-2.0.1.tgz"
   "version" "2.0.1"
+
+"earcut@^2.2.3":
+  "integrity" "sha512-iRDI1QeCQIhMCZk48DRDMVgQSSBDmbzzNhnxIo+pwx3swkfjMh6vh0nWLq1NdvGHLKH6wIrAM3vQWeTj6qeoug=="
+  "resolved" "https://registry.npmjs.org/earcut/-/earcut-2.2.3.tgz"
+  "version" "2.2.3"
 
 "ee-first@1.1.1":
   "integrity" "sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0="
@@ -991,7 +1030,7 @@
   "resolved" "https://registry.npm.taobao.org/toidentifier/download/toidentifier-1.0.0.tgz"
   "version" "1.0.0"
 
-"tslib@2.0.3":
+"tslib@>=1.10.0", "tslib@2.0.3":
   "integrity" "sha1-jgdBrEX8DCJuWKF7/D5kubxsphw="
   "resolved" "https://registry.nlark.com/tslib/download/tslib-2.0.3.tgz"
   "version" "2.0.3"

@@ -13,5 +13,7 @@ import  "./assets/css/index/index.css";
 export default {
   name: 'App'
 }
+window.debug_xu = true
+window.debug0_xu = true
 </script>
 
