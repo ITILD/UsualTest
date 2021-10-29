@@ -35,8 +35,8 @@ function datGuiControl(guiRoot, controlParams) {
   // 设定参数
   let realHeight
   let height_param = gui_0_f0.add(viwerSettingFull.sceneParam, 'height_param')
-  height_param.onChange(function(value) {
-    realHeight =value
+  height_param.onChange(function (value) {
+    realHeight = value
     console.log("onChange:" + value)
   });
 
@@ -113,9 +113,12 @@ function datGuiControl(guiRoot, controlParams) {
       const feature = fullJson.features[index]
       let geometry = feature.geometry
       let properties = feature.properties
-      let downHeight = properties['b']
-      if (!downHeight) {
-        alert('数据地面高程字段不存在')
+      let downHeight = properties[realHeight]
+      // if (!downHeight) {
+        // console.log(typeof downHeight)
+      if (typeof downHeight !== 'number') {
+        alert('数据地面高程字段 ' + realHeight + ' 不存在')
+  
         break
       }
       let coordinatesArrayUp = geometry.coordinates[0][0]

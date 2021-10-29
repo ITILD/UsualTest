@@ -174,8 +174,8 @@ export default defineComponent({
     }
 
     // 控制
-    // ControlDefault.debuggerStart = true
-    // ControlDefault.index(visibleDraw)
+    ControlDefault.debuggerStart = true
+    ControlDefault.index(visibleDraw)
 
     return {
       visibleDraw,

@@ -96,6 +96,12 @@ IndexInfo.workList = [
                 completeness: 0.01,
                 key: '/App/GL/Babylon/BabylonBatch_NoTrangle  ',
               },
+               {
+                abstract: 'ccc',
+                title: 'WebGpuCAD',
+                completeness: 0.01,
+                key: '/App/GL/Babylon/WebGpuCAD',
+              },
               //  {
               //   abstract: 'ccc',
               //   title: 'BabylonTest',

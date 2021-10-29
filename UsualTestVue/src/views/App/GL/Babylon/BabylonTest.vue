@@ -19,7 +19,7 @@ import { datGuiControl } from '../../../../api/App/GL/Babylon/BabylonTest/datGui
 
 import { fullJson } from './modelTest1/fullJson.js'
 import { matrixSimple } from './modelTest1/matrixSimple.js'
-import * as earcut from 'earcut'
+import  earcut from 'earcut'
 window.earcut = earcut
 /**
  * 左手坐标系

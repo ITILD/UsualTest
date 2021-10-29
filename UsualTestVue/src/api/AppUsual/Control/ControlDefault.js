@@ -75,8 +75,8 @@ class ControlDefault {
           }
           break
         default:
-          break //其余全禁用
-        // return; //其余全放通
+          // break //其余全禁用
+        return; //其余全放通
       }
       console.log('default')
       event.preventDefault()

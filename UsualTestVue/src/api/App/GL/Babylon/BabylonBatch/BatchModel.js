@@ -1,3 +1,5 @@
+import  earcut from 'earcut' //三角剖切
+
 class BatchModel {
   showAxis = function (size) {
     let makeTextPlane = (text, color, size) => {

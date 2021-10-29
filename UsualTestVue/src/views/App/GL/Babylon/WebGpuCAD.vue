@@ -17,9 +17,8 @@ import earcut from 'earcut' //三角剖切
 // -------DATA
 import { fullJson } from './BabylonBatchData/fullJson.js'
 // -------MOUDLE
-import { datGuiControl } from '../../../../api/App/GL/Babylon/BabylonBatch/datGuiControl.js'
-import { BabylonHelp } from '../../../../api/App/GL/Babylon/WebGpuCAD/lib/BabylonPlugin/BabylonHelp.js'
-// import { BatchModel } from './BabylonBatchData/BatchModel.js'
+import { datGuiControl } from '../../../../api/App/GL/Babylon/WebGpuCAD/datGuiControl.js'
+import { BabylonHelp } from '../../../../api/App/GL/Babylon/BabylonPlugin/BabylonHelp.js'
 window.earcut = earcut
 window.BABYLON = BABYLON
 
@@ -73,17 +72,17 @@ export default {
       window.debug_xu && BabylonHelp.showAxis(1000)
       //  scene.dispose()
 
-      // -----------------------------------------------------------------datgui场景控制
-      let controlParams = {
-        scene: scene,
-        engine: engine,
-        GLTF2Export: GLTF2Export,
-        scene: scene
-      }
-      const box = document.querySelector('#datGui')
-      const gui_0_root = new dat.GUI({ autoPlace: false })
-      box.appendChild(gui_0_root.domElement)
-      datGuiControl(gui_0_root, controlParams)
+   // -----------------------------------------------------------------datgui场景控制
+    let controlParams = {
+      scene: scene,
+      engine: engine,
+      GLTF2Export: GLTF2Export
+      // scene: scene
+    };
+    const box = document.querySelector("#datGui");
+    const gui_0_root = new dat.GUI({ autoPlace: false });
+    box.appendChild(gui_0_root.domElement);
+    datGuiControl(gui_0_root, controlParams);
 
 
       //   /**
@@ -91,22 +90,6 @@ export default {
       //  * 转babylon引擎左手系  y与z轴互换！！！  视角与坐标
       //  *
       //  *  */
-
-      // let testPosition = [186000, 2496000]
-      // for (let index = 0; index < fullJson.features.length; index++) {
-      //   // for (let index = 0; index < 1; index++) {
-      //   const feature = fullJson.features[index]
-      //   let geometry = feature.geometry
-      //   let properties = feature.properties
-      //   let coordinatesArrayUp = geometry.coordinates[0][0]
-      //   // 预处理底面
-      //   BatchModel.moveXY(coordinatesArrayUp, [197322.8269951, 2507964.03])
-      //   // let  coordinatesArrayDown =BatchModel.creatWallArrays(coordinatesArrayUp, 0)
-      //   let polygon = BatchModel.createWallExtrudePolygon(
-      //     coordinatesArrayUp.slice(0, coordinatesArrayUp.length - 1),
-      //     200
-      //   )
-      // }
     }
 
     onMounted(getViewer)

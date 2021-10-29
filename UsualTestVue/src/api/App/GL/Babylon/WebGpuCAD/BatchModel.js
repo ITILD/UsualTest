@@ -1,41 +1,42 @@
-import  earcut from 'earcut' //三角剖切
+/* eslint-disable no-undef */
+import * as earcut from "earcut"; //三角剖切
+import * as BABYLON from "@babylonjs/core";
+/**
+ * 批量生产矢量模型glb辅助函数
+ */
 class BatchModel {
-  showAxis = function (size) {
+  /**
+   * 场景辅助坐标系确认
+   * @param {*} size 坐标轴rgb尺寸
+   */
+  showAxis = function(size) {
     let makeTextPlane = (text, color, size) => {
       let dynamicTexture = new BABYLON.DynamicTexture(
-        'DynamicTexture',
+        "DynamicTexture",
         150,
         scene,
         true
-      )
-      dynamicTexture.hasAlpha = true
+      );
+      dynamicTexture.hasAlpha = true;
       dynamicTexture.drawText(
         text,
         5,
         40,
-        'bold 36px Arial',
+        "bold 36px Arial",
         color,
-        'transparent',
+        "transparent",
         true
-      )
-      let plane = new BABYLON.Mesh.CreatePlane(
-        'TextPlane',
-        size,
-        scene,
-        true
-      )
-      plane.material = new BABYLON.StandardMaterial(
-        'TextPlaneMaterial',
-        scene
-      )
-      plane.material.backFaceCulling = false
-      plane.material.specularColor = new BABYLON.Color3(0, 0, 0)
-      plane.material.diffuseTexture = dynamicTexture
-      return plane
-    }
+      );
+      let plane = new BABYLON.Mesh.CreatePlane("TextPlane", size, scene, true);
+      plane.material = new BABYLON.StandardMaterial("TextPlaneMaterial", scene);
+      plane.material.backFaceCulling = false;
+      plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
+      plane.material.diffuseTexture = dynamicTexture;
+      return plane;
+    };
 
     let axisX = BABYLON.Mesh.CreateLines(
-      'axisX',
+      "axisX",
       [
         new BABYLON.Vector3.Zero(),
         new BABYLON.Vector3(size, 0, 0),
@@ -44,12 +45,12 @@ class BatchModel {
         new BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
       ],
       scene
-    )
-    axisX.color = new BABYLON.Color3(1, 0, 0)
-    let xChar = makeTextPlane('xRyGzB', 'red', size / 2)
-    xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0)
+    );
+    axisX.color = new BABYLON.Color3(1, 0, 0);
+    let xChar = makeTextPlane("xRyGzB", "red", size / 2);
+    xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
     let axisY = BABYLON.Mesh.CreateLines(
-      'axisY',
+      "axisY",
       [
         new BABYLON.Vector3.Zero(),
         new BABYLON.Vector3(0, size, 0),
@@ -58,12 +59,12 @@ class BatchModel {
         new BABYLON.Vector3(0.05 * size, size * 0.95, 0)
       ],
       scene
-    )
-    axisY.color = new BABYLON.Color3(0, 1, 0)
+    );
+    axisY.color = new BABYLON.Color3(0, 1, 0);
     // let yChar = makeTextPlane("Y", "green", size / 10);
     // yChar.position = new BABYLON.Vector3(0, 0.9 * size, -0.05 * size);
     let axisZ = BABYLON.Mesh.CreateLines(
-      'axisZ',
+      "axisZ",
       [
         new BABYLON.Vector3.Zero(),
         new BABYLON.Vector3(0, 0, size),
@@ -72,25 +73,28 @@ class BatchModel {
         new BABYLON.Vector3(0, 0.05 * size, size * 0.95)
       ],
       scene
-    )
-    axisZ.color = new BABYLON.Color3(0, 0, 1)
+    );
+    axisZ.color = new BABYLON.Color3(0, 0, 1);
     // let zChar = makeTextPlane("Z", "blue", size / 10);
     // zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
     // return [axisX,axisY,axisZ,xChar,yChar,zChar]
-  }
+  };
+
   static makePlogon3DUp(walldownOne) {
-    let walldownOneIndex = earcut(walldownOne, null, 3) //walldownOne索引
-    console.log(walldownOneIndex, walldownOne)
+    let walldownOneIndex = earcut(walldownOne, null, 3); //walldownOne索引
+    console.log(walldownOneIndex, walldownOne);
     for (let index = 0; index < walldownOneIndex.length; index += 3) {
-      let index0 = walldownOneIndex[index] * 3
-      let index1 = walldownOneIndex[index + 1] * 3
-      let index2 = walldownOneIndex[index + 2] * 3
+      let index0 = walldownOneIndex[index] * 3;
+      let index1 = walldownOneIndex[index + 1] * 3;
+      let index2 = walldownOneIndex[index + 2] * 3;
       let myPaths = [
-        [new BABYLON.Vector3(
+        [
+          new BABYLON.Vector3(
             walldownOne[index2],
             walldownOne[index2 + 2],
             walldownOne[index2 + 1]
-          ), new BABYLON.Vector3(
+          ),
+          new BABYLON.Vector3(
             walldownOne[index1],
 
             walldownOne[index1 + 2],
@@ -102,42 +106,41 @@ class BatchModel {
             walldownOne[index0 + 1]
           ),
 
-
           new BABYLON.Vector3(
             walldownOne[index0],
             walldownOne[index0 + 2],
             walldownOne[index0 + 1]
-          ),
-
-        ],
-      ]
+          )
+        ]
+      ];
 
       //Create ribbon with updatable parameter set to true for later changes
       BABYLON.MeshBuilder.CreateRibbon(
-        'ribbon',
+        "ribbon",
         {
-          pathArray: myPaths,
+          pathArray: myPaths
           // sideOrientation: BABYLON.Mesh.DOUBLESIDE,
           // updatable: true,
         },
         scene
-      )
+      );
     }
   }
   static makePlogon3DDown(walldownOne) {
-    let walldownOneIndex = earcut(walldownOne, null, 3) //walldownOne索引
-    console.log(walldownOneIndex, walldownOne)
+    let walldownOneIndex = earcut(walldownOne, null, 3); //walldownOne索引
+    console.log(walldownOneIndex, walldownOne);
     for (let index = 0; index < walldownOneIndex.length; index += 3) {
-      let index0 = walldownOneIndex[index] * 3
-      let index1 = walldownOneIndex[index + 1] * 3
-      let index2 = walldownOneIndex[index + 2] * 3
+      let index0 = walldownOneIndex[index] * 3;
+      let index1 = walldownOneIndex[index + 1] * 3;
+      let index2 = walldownOneIndex[index + 2] * 3;
       let myPaths = [
         [
           new BABYLON.Vector3(
             walldownOne[index0],
             walldownOne[index0 + 2],
             walldownOne[index0 + 1]
-          ), new BABYLON.Vector3(
+          ),
+          new BABYLON.Vector3(
             walldownOne[index1],
 
             walldownOne[index1 + 2],
@@ -153,111 +156,151 @@ class BatchModel {
             walldownOne[index2],
             walldownOne[index2 + 2],
             walldownOne[index2 + 1]
-          ),
-
-        ],
-      ]
+          )
+        ]
+      ];
 
       //Create ribbon with updatable parameter set to true for later changes
       BABYLON.MeshBuilder.CreateRibbon(
-        'ribbon',
+        "ribbon",
         {
-          pathArray: myPaths,
+          pathArray: myPaths
           // sideOrientation: BABYLON.Mesh.DOUBLESIDE,
           // updatable: true,
         },
         scene
-      )
+      );
     }
   }
-  // 获取底面
+
+  /**
+   * 获取底面
+   * @param {*} pathUp
+   * @param {*} low
+   * @returns
+   */
   static creatWallArrays(pathUp, low) {
     let pathDown = JSON.parse(JSON.stringify(pathUp));
     pathDown.forEach(path => {
-      path[2] = low
-    })
-    return pathDown
+      path[2] = low;
+    });
+    return pathDown;
   }
 
-  // 创建墙面
+  /**
+   * 创建墙面（复杂）
+   * @param {*} pathUp
+   * @param {*} pathDown
+   */
   static createWall(pathUp, pathDown) {
     // ribbon
-    let endVector3Up = ArrayHelp.arrayToVector3(pathUp)
-    let endVector3Down = ArrayHelp.arrayToVector3(pathDown)
+    let endVector3Up = ArrayHelp.arrayToVector3(pathUp);
+    let endVector3Down = ArrayHelp.arrayToVector3(pathDown);
     // let ribbon = BABYLON.MeshBuilder.CreateRibbon('ribbon', { pathArray: [endVector3Down, endVector3Up], sideOrientation: BABYLON.Mesh.DOUBLESIDE, }, scene)
-    let ribbon = BABYLON.MeshBuilder.CreateRibbon('ribbon', { pathArray: [endVector3Down, endVector3Up], }, scene)
+    BABYLON.MeshBuilder.CreateRibbon(
+      "ribbon",
+      { pathArray: [endVector3Down, endVector3Up] },
+      scene
+    );
     // ribbon.material = mat;
   }
 
-  // 创建  直接拉面
-  static createWallExtrudePolygon(pathUp, depth) {
+  /**
+   * 创建  直接拉面（简易）
+   * @param {*} pathUp
+   * @param {*} depth
+   * @param {*} downHeight
+   * @returns
+   */
+  static createWallExtrudePolygon(pathUp, depth, downHeight) {
     // ribbon
     // let endVector3Up = ArrayHelp.arrayToVector3(pathUp)
-    let endVector3Up = ArrayHelp.arrayToVector3Back(pathUp)
-    let depthUp = ArrayHelp.heightFull(pathUp)
+    let endVector3Up = ArrayHelp.arrayToVector3Back(pathUp);
+    let depthUp = ArrayHelp.heightFull(pathUp);
     // console.log(depthUp)
+    // let realHeigth =  depthUp-depth
+    let realHeigth;
+    if (downHeight) {
+      realHeigth = downHeight;
+    } else {
+      realHeigth = depthUp - depth;
+    }
 
-
+    if (realHeigth < 0) {
+      console.log("底面高于顶面");
+      return;
+    }
     // let ribbon = BABYLON.MeshBuilder.CreateRibbon('ribbon', { pathArray: [endVector3Down, endVector3Up], sideOrientation: BABYLON.Mesh.DOUBLESIDE, }, scene)
     // let ribbon =  BABYLON.MeshBuilder.ExtrudePolygon("polygon", {shape:endVector3Up,  depth: depth, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene);
-    let polygon = BABYLON.MeshBuilder.ExtrudePolygon("polygon", { shape: endVector3Up, depth: depthUp }, scene);
-    polygon.position.y = depthUp
-    return polygon
+    let polygon = BABYLON.MeshBuilder.ExtrudePolygon(
+      "polygon",
+      { shape: endVector3Up, depth: realHeigth },
+      scene
+    );
+    polygon.position.y = depthUp;
+
+    return polygon;
     // ribbon.material = mat;
   }
 
-
-
   // 减去大数   位移
+  /**
+   * 投影数据直接减去大数 独立坐标系
+   * @param {*} array
+   * @param {*} arryDXY
+   */
   static moveXY(array, arryDXY) {
-    let x = arryDXY[0]
-    let y = arryDXY[1]
+    let x = arryDXY[0];
+    let y = arryDXY[1];
     for (let index = 0; index < array.length; index++) {
       const element = array[index];
-      element[0] -= x
-      element[1] -= y
-
+      element[0] -= x;
+      element[1] -= y;
     }
   }
 
-  // 二维数组转一维度
+  /**
+   * 二维数组转一维度
+   * @param {*} arr
+   * @returns
+   */
   static flatten(arr) {
-    return [].concat(...arr.map((x) => (Array.isArray(x) ? flatten(x) : x)))
+    return [].concat(...arr.map(x => (Array.isArray(x) ? flatten(x) : x)));
   }
-
 }
 
+/**
+ * js数组与babylonjs vector3数组转换
+ * 涉及正反向
+ */
 class ArrayHelp {
   static arrayToVector3(arrays) {
     let arraysResult = [];
     for (let index = 0; index < arrays.length; index++) {
       const array = arrays[index];
-      arraysResult.push(new BABYLON.Vector3(array[0], array[2], array[1]));
+      arraysResult.push(new BABYLON.Vector3(-array[0], array[2], -array[1]));
     }
 
-    return arraysResult
+    return arraysResult;
   }
   static arrayToVector3Back(arrays) {
     let arraysResult = [];
     for (let index = arrays.length - 1; index >= 0; index--) {
       const array = arrays[index];
-      arraysResult.push(new BABYLON.Vector3(array[0], array[2], array[1]));
+      arraysResult.push(new BABYLON.Vector3(-array[0], array[2], -array[1]));
     }
 
-    return arraysResult
+    return arraysResult;
   }
   // 平均高程
   static heightFull(arrays) {
     let arraysResult = 0;
     for (let index = 0; index < arrays.length; index++) {
-
-      arraysResult += arrays[index][2]
-
+      arraysResult += arrays[index][2];
     }
-    arraysResult /= arrays.length
-    return arraysResult
+    arraysResult /= arrays.length;
+    return arraysResult;
   }
-
 }
 
-export { BatchModel }
+export { BatchModel };

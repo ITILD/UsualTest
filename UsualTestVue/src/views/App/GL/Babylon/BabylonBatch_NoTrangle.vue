@@ -18,7 +18,7 @@ import { GLTF2Export } from 'babylonjs-serializers'
 
 import { fullJson } from './BabylonBatchData/fullJson.js'
 import { matrixSimple } from './modelTest1/matrixSimple.js'
-import * as earcut from 'earcut' //三角剖切
+import  earcut from 'earcut' //三角剖切
 import { datGuiControl } from '../../../../api/App/GL/Babylon/BabylonTest/datGuiControl.js'
 import { BabylonHelp } from '../../../../api/App/GL/Babylon/BabylonPlugin/BabylonHelp.js'
 import { BatchModel } from './BabylonBatchData/BatchModel.js'

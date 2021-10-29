@@ -13,7 +13,9 @@ import  "./assets/css/index/index.css";
 export default {
   name: 'App'
 }
-window.debug_xu = true
-window.debug0_xu = true
+// 开发调试
+window.debug_xu = !true
+// 运行调试
+window.debug0_xu = !true
 </script>
 
