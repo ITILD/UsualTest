@@ -3,9 +3,9 @@ import { IndexInfo } from '../data/setting/IndexInfo.js'
 
 import Index from '../views/Index.vue'
 // import Index1 from '../views/App/GL/Cesium/CesiumStart.vue'
-// import Index1 from '../views/App/GL/Cesium/CesiumTest.vue'
+import Index1 from '../views/App/GL/Cesium/CesiumTest.vue'
 // import Index1 from '../views/App/GL/Babylon/BabylonTest.vue'
-import Index1 from '../views/App/GL/Babylon/BabylonBatch.vue'
+// import Index1 from '../views/App/GL/Babylon/BabylonBatch.vue'
 import { filterAsyncRoutes } from './filterAsyncRoutes.js'
 const routerHistory = createWebHistory()
 
@@ -94,7 +94,7 @@ const children = []
 // })
 
 filterAsyncRoutes(IndexInfo.workList, children)
-console.log('filterAsyncRoutes', children)
+// console.log('filterAsyncRoutes', children)
 children.push(
 {
   path: '',

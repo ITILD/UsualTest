@@ -17,10 +17,10 @@ import earcut from 'earcut' //三角剖切
 // -------DATA
 import { fullJson } from './BabylonBatchData/fullJson.js'
 // -------MOUDLE
-import { datGuiControl } from '../../../../api/App/GL/Babylon/WebGpuCAD/datGuiControl.js'
+import { datGuiControl } from '../../../../api/App/GL/Babylon/WebGpuCAD/GuiControl_Main.js'
 import { BabylonHelp } from '../../../../api/App/GL/Babylon/BabylonPlugin/BabylonHelp.js'
-window.earcut = earcut
-window.BABYLON = BABYLON
+// window.earcut = earcut
+// window.BABYLON = BABYLON
 
 export default {
   name: 'Index3d_首页',
@@ -77,7 +77,6 @@ export default {
       scene: scene,
       engine: engine,
       GLTF2Export: GLTF2Export
-      // scene: scene
     };
     const box = document.querySelector("#datGui");
     const gui_0_root = new dat.GUI({ autoPlace: false });

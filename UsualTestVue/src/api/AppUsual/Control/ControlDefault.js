@@ -40,7 +40,7 @@ class ControlDefault {
       }
       console.log('default')
       event.preventDefault()
-      console.log(event)
+      // console.log(event)
     }
     ControlDefault.debuggerStart||ControlDefault.defaultMouseEvent()
   }
@@ -56,7 +56,7 @@ class ControlDefault {
     let onkeydownFunc = (event) => {
       // 清除本次默认动作
       let key = event.key
-      console.log(event)
+      // console.log(event)
       switch (key) {
         case 'p':
           console.log('testtttttttt-------')

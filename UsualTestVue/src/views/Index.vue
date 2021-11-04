@@ -100,7 +100,7 @@ const getParentKey = (key, tree) => {
 }
 
 //--debugger
-console.log(dataList, genData)
+// console.log(dataList, genData)
 
 export default defineComponent({
   components: { RightSquareTwoTone },

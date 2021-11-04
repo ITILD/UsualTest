@@ -1,9 +1,5 @@
 /* eslint-disable no-debugger */
-import { viwerSettingFull } from "./viwerSettingFull.js";
-// import * as cesiumPlugin from '../../../../../../public/lib/in/cesiumplugin.mjs'
-// import { SceneInteraction } from './sceneParam/SceneInteraction.js'
-// import { CesiumPrimitivesProvider_CameraCenter2D } from './spatialTree/CesiumPrimitivesProvider_CameraCenter2D.js'
-// import { UsualGeoOctree } from './spatialTree/UsualGeoOctree.js'
+import { viwerSettingFull } from "./GuiControl_Main_Setting.js";
 import { BatchModel } from "./BatchModel.js";
 
 function datGuiControl(guiRoot, controlParams) {

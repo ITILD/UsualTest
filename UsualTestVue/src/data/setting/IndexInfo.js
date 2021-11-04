@@ -110,6 +110,45 @@ IndexInfo.workList = [
             ],
           },
         ],
+      },
+      {
+        title: 'EasyCAD',
+        // completeness: 0.01,
+        abstract: 'CAD编辑器',
+        key: '0-2',
+        children: [
+          {
+            abstract: 'WebGisCAD',
+            title: 'WebGisCAD',
+            completeness: 0.01,
+            key: '/App/EasyCAD/WebGisCAD/CADMain',
+          }]
+      },
+      {
+        title: 'Templates',
+        // completeness: 0.01,
+        abstract: '模板',
+        key: '0-3',
+        children: [
+          {
+            abstract: 'GL',
+            title: 'GL',
+            completeness: 0.01,
+            key: '/App/Templates/GL',
+            children: [
+              {
+                abstract: 'ccc',
+                completeness: 0.01,
+                title: 'TemplateControls',
+                key: '/App/Templates/GL/TemplateControls',
+              },
+              {
+                abstract: 'ccc',
+                completeness: 0.01,
+                title: 'TemplateParams',
+                key: '/App/Templates/GL/TemplateParams',
+              }]
+          }]
       }
     ],
   },

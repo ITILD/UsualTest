@@ -32,7 +32,7 @@ window.earcut = earcut
  */
 
 //
-window.BABYLON = BABYLON
+// window.BABYLON = BABYLON
 
 export default {
   name: 'Index3d_首页',

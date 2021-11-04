@@ -20,8 +20,8 @@ import { fullJson } from './BabylonBatchData/fullJson.js'
 import { datGuiControl } from '../../../../api/App/GL/Babylon/BabylonBatch/datGuiControl.js'
 import { BabylonHelp } from '../../../../api/App/GL/Babylon/WebGpuCAD/lib/BabylonPlugin/BabylonHelp.js'
 // import { BatchModel } from './BabylonBatchData/BatchModel.js'
-window.earcut = earcut
-window.BABYLON = BABYLON
+// window.earcut = earcut
+// window.BABYLON = BABYLON
 
 export default {
   name: 'Index3d_首页',
