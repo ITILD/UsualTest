@@ -1,6 +1,6 @@
 // import { HoleDraw } from "../../../../src/cesiumplugin/core/draw/mouse/HoleDraw.js";
 // import { ClippingPlanesByGeom } from "../../../../src/cesiumplugin/core/primitives/clipPlanes/ClippingPlanesByGeom.js";
-import { ClippingPlanesByGeom } from "../../../../src/cesiumplugin.js";
+import { ClippingPlanesByGeom } from "../../lib/geo/cesiumplugin.mjs";
 
 class ConstControl {
   constructor() {}

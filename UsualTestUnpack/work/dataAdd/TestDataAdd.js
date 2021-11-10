@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { ClippingPlanesByGeom, CameraPro, RenderGlb, LocalAndWorldTransform, RenderSimple} from '../../../../src/cesiumplugin.js'
+// import { ClippingPlanesByGeom, CameraPro, RenderGlb, LocalAndWorldTransform, RenderSimple} from '../../lib/geo/cesiumplugin.mjs'
+import { ClippingPlanesByGeom, CameraPro, RenderGlb, LocalAndWorldTransform, RenderSimple} from '../../lib/geo/cesiumplugin.mjs'
 
 // import { ClippingPlanesByGeom } from '../../../../src/cesiumplugin/core/primitives/clipPlanes/ClippingPlanesByGeom.js'
 // import { CameraPro } from '../../../../src/cesiumplugin/core/control/camera/CameraPro.js'

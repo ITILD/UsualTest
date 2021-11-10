@@ -1,6 +1,6 @@
 // import { RenderSimple } from '../../../../src/cesiumplugin/core/primitives/renderGeom/RenderSimple.js'
 // import { CameraPro } from '../../../../src/cesiumplugin/core/control/camera/CameraPro.js'
-import { CameraPro, RenderSimple} from "../../../../src/cesiumplugin.js";
+import { CameraPro, RenderSimple} from "../../lib/geo/cesiumplugin.mjs";
 class TestInteraction {
 
   /**

@@ -1,5 +1,5 @@
 // var viewer = new Cesium.Viewer("cesiumContainer");
-import { InitViewer } from "../../../../src/cesiumplugin.js";
+import { InitViewer } from "../../lib/geo/cesiumplugin.mjs";
 
 // import { InitViewer } from "../../../../dist/cesiumplugin.mjs";
 

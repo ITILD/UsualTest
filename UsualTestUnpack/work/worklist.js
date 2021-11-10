@@ -3,7 +3,8 @@ import { initSimple } from "../work/viwerWork/initSimple.js";
 import { TestDataAdd } from "../work/dataAdd/TestDataAdd.js";
 import { TestInteraction } from "../work/interaction/TestInteraction.js";
 import { ConstControl } from "../work/draw/ConstControl.js";
-import { MouseListen, BaseDraw, HoleDraw} from "../../../src/cesiumplugin.js";
+// import { MouseListen, BaseDraw, HoleDraw} from "../lib/geo/cesiumplugin.mjs";
+import { MouseListen, BaseDraw, HoleDraw} from "../lib/geo/cesiumplugin.mjs";
 
 function workList() {
 
