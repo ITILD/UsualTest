@@ -43,6 +43,8 @@ function workList() {
       { name: '地形', func: () => { testDataAdd.addTestTerrain() }, class: 'leftWorkListButton' },
       { name: 'glb', func: () => { testDataAdd.addTestGlb() }, class: 'leftWorkListButton' },
       { name: 'entity', func: () => { testDataAdd.addTestEntity() }, class: 'leftWorkListButton' },
+      { name: 'entity0横向分层', func: () => { testDataAdd.addTestEntity0() }, class: 'leftWorkListButton' },
+      { name: 'entity1单层位移', func: () => { testDataAdd.addTestEntity1() }, class: 'leftWorkListButton' },
 
       // 绘制
       { title: '鼠标', class: 'leftWorkListTitle' },

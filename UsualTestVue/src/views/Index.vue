@@ -86,7 +86,6 @@ const getParentKey = (key, tree) => {
 
   for (let i = 0; i < tree.length; i++) {
     const node = tree[i]
-
     if (node.children) {
       if (node.children.some((item) => item.key === key)) {
         parentKey = node.key
@@ -95,7 +94,7 @@ const getParentKey = (key, tree) => {
       }
     }
   }
-
+  debugger
   return parentKey
 }
 
@@ -113,10 +112,10 @@ export default defineComponent({
     }
 
     // 手机控制和电脑控制 缩小后显示  esc
-    const showDrawer = () => {
-      console.log('click')
-      visibleDraw.value = true
-    }
+    // const showDrawer = () => {
+    //   console.log('click')
+    //   visibleDraw.value = true
+    // }
 
     // **************列表
     const expandedKeys = ref([])
@@ -137,12 +136,13 @@ export default defineComponent({
         .map((item) => {
           //筛选value符合title
           if (item.title.indexOf(value) > -1) {
+            console.log('test',item.title,item.key,gData.value,getParentKey(item.key, gData.value))
             return getParentKey(item.key, gData.value)
           }
           return null
         })
         .filter((item, i, self) => item && self.indexOf(item) === i) //防止undifined？？？
-
+        console.log(expanded)
       //  搜索不存在或空  恢复搜索前状态
       if (expanded.length == 0 || !value || value == '') {
         expandedKeys.value = thisExpandedKeysValue
@@ -151,8 +151,8 @@ export default defineComponent({
         expandedKeys.value = expanded
         searchValue.value = value
       }
-
-      // autoExpandParent.value = true
+      // 父目录打开设置！！！！
+      autoExpandParent.value = true
     })
     // function(selectedKeys, e:{selected: bool, selectedNodes, node, event})
     const router = useRouter()
@@ -180,7 +180,7 @@ export default defineComponent({
     return {
       visibleDraw,
       afterVisibleChange,
-      showDrawer,
+      // showDrawer,
       // 列表
       expandedKeys,
       searchValue,
