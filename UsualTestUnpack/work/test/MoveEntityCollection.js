@@ -91,7 +91,7 @@ class MoveEntityCollection {
     let pillarsPositoinsArraysClone = JSON.parse(
       JSON.stringify(pillarsPositoinsArrays)
     )
-
+    debugger
     // 循环更新位置
     let loop = setInterval(() => {
       if (

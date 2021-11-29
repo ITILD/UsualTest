@@ -26,13 +26,14 @@ class MoveEntityCollectionRow {
    * @param {*} floors 楼层数
    * @param {*} precision 单层分割数（精度）  默认单层不分层1   （？多层三点贝塞尔？）
    */
-  add(geomPositionsDown, height, floors,precision) {
+  add(geomPositionsDown, oneFloorHeight, floors,precision) {
     // 默认单层1
     precision||(precision=1)
+    let realOneFloorHeight = oneFloorHeight/precision//纵向节点间高度
     // let Cartesian3ZERO = { x: 0, y: 0, Z: 0 }
     // // 局部ENU坐标系 转换系数
     let localAndWorldTransform = new LocalAndWorldTransform(
-      geomPositionsDown[1]//简写 没用中心点
+      geomPositionsDown[1]//简写 没用中心点 底面边角可能翘边
     ) 
     let groundPositionsLength = geomPositionsDown.length //上底面点数 柱子数
     // let pillarsPositoinsLength = Math.floor(height / precision) + 1 //柱子点数
@@ -42,7 +43,7 @@ class MoveEntityCollectionRow {
     let geomPositionsUp = [] //上表面
     let geomPositionsFullArrays = [geomPositionsDown, geomPositionsUp] //总面[底面,上表面，立面]
 
-    // 初始化垂直边
+    //以enu局部坐标系参数 初始化垂直边
     for (let i = 0; i < groundPositionsLength; i++) {
       let pillarsPositoins = []
       pillarsPositoinsArrays.push(pillarsPositoins)
@@ -50,45 +51,38 @@ class MoveEntityCollectionRow {
         localAndWorldTransform.WorldCoordinatesTolocal(geomPositionsDown[i])
       let h = 0
       let j = 0
-      while (h < height) {
-        thisPointPositionLocal.z = h
-        console.log(thisPointPositionLocal.z)
+      for (let index = 0; index < pillarsPositoinsLength; index++) {//单个柱子底面到顶
 
-        /**********************x*********************** */
+        thisPointPositionLocal.z = index*realOneFloorHeight//节点高度
         let newPillarsPositoin = localAndWorldTransform.localToWorldCoordinates(
           thisPointPositionLocal
         )
         pillarsPositoins.push(newPillarsPositoin)
-        h += precision
-        j++
       }
-
-      // 顶端单独处理
-      /**********************x*********************** */
-      thisPointPositionLocal.z = height
-      let newPillarsPositoin = localAndWorldTransform.localToWorldCoordinates(
-        thisPointPositionLocal
-      )
-      pillarsPositoins.push(newPillarsPositoin)
-
-      // RenderSimple.simplePointByPrimitives(this.viewer.scene.primitives.add(new Cesium.PointPrimitiveCollection()), pillarsPositoins[j], 2, Cesium.Color.fromAlpha(Cesium.Color.RED, 0.5), 3.0)
     }
 
+    for (let index = 0; index < (pillarsPositoinsLength-1)*groundPositionsLength; index++) {
+      geomPositionsFullArrays.push([])
+    }
     // console.log('pillarsPositoinsArrays', pillarsPositoinsArrays)
 
-    // 绑定并初始化
+    // 柱子绑定到具体面(点位内存关联)    绑定并初始化
     for (let i = 0; i < groundPositionsLength; i++) {
       let indexNext = (i + 1) % groundPositionsLength
       let thisPillarsPositoins = pillarsPositoinsArrays[i]
       let nextPillarsPositoins = pillarsPositoinsArrays[indexNext]
-      geomPositionsFullArrays.push([])
-
-      // 垂直面
-      for (let j = 0; j < pillarsPositoinsLength; j++) {
-        geomPositionsFullArrays[i + 2][j] = thisPillarsPositoins[j]
-        geomPositionsFullArrays[i + 2][pillarsPositoinsLength + j] =
-          nextPillarsPositoins[pillarsPositoinsLength - 1 - j]
+      // geomPositionsFullArrays.push([])
+      // 包围立面
+  
+      for (let j = 0; j < pillarsPositoinsLength-1; j++) {
+        // 单立柱拼接
+        let thisI = i+j + 2
+        geomPositionsFullArrays[thisI][0] = thisPillarsPositoins[j]//下
+        geomPositionsFullArrays[thisI][1] =thisPillarsPositoins[j+1]// 上
+        geomPositionsFullArrays[thisI][2] = nextPillarsPositoins[j+1]//下
+        geomPositionsFullArrays[thisI][3] =nextPillarsPositoins[j]// 上
       }
+
       // 顶面
       geomPositionsFullArrays[1][i] =
         thisPillarsPositoins[pillarsPositoinsLength - 1]
@@ -100,6 +94,8 @@ class MoveEntityCollectionRow {
       JSON.stringify(pillarsPositoinsArrays)
     )
 
+    console.log(geomPositionsFullArrays)
+    debugger
     // 循环更新位置
     let loop = setInterval(() => {
       if (
@@ -149,18 +145,18 @@ class MoveEntityCollectionRow {
 
     // // this._mouseMovePointPrimitives.position = geomPositoinsArrays[1][2]
     for (let index = 0; index < geomPositionsFullArrays.length; index++) {
+    // for (let index = 0; index < 3; index++) {
+      
       let mousePolygonGroundEntity = this.entities.add({
 
         // name: 'polygon',
         polygon: {
+          // hierarchy: new Cesium.PolygonHierarchy(geomPositionsFullArrays[index].slice(2,7)),
+          // hierarchy: new Cesium.PolygonHierarchy(geomPositionsFullArrays[index]),
           hierarchy: new Cesium.CallbackProperty(() => {
-
-            // console.log(viewer.clock.currentTime)
             return new Cesium.PolygonHierarchy(geomPositionsFullArrays[index])
           }, false),
           perPositionHeight: true,
-
-          // hierarchy: new Cesium.PolygonHierarchy(geomPositoinsArrays[0]),
           material: Cesium.Color.fromAlpha(Cesium.Color.WHITE, 0.8),
         },
       })

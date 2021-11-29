@@ -81,6 +81,7 @@ function datGuiControl(guiRoot, controlParams) {
 
   // 上传
   viwerSettingFull.sceneParam.UpModelFile = () => {
+    // 清空上次场景
     if (polygonToDelete.length > 0) {
       let length = polygonToDelete.length;
       for (let index = 0; index < length; index++) {
@@ -90,6 +91,7 @@ function datGuiControl(guiRoot, controlParams) {
         }
       }
     }
+    // 获取文件
     getFile();
   };
   gui_0_f0.add(viwerSettingFull.sceneParam, "UpModelFile");

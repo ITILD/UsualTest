@@ -165,6 +165,8 @@ class MoveEntityCollectionRow_Position {
           material: Cesium.Color.fromAlpha(Cesium.Color.WHITE, 0.8),
         },
       })
+
+      
     }
   }
 

@@ -1109,43 +1109,43 @@ class TestDataAdd {
       stop,
       0.4
     )
-    moveEntity.add(postyionsArrays[0], 140, 20)
-    moveEntity.add(postyionsArrays[1], 20, 5)
-    moveEntity = new MoveEntityCollectionRow(
-      this.viewer,
-      this.entities,
-      start,
-      stop,
-      1.1
-    )
-    moveEntity.add(postyionsArrays[2], 30, 10)
-    moveEntity = new MoveEntityCollectionRow(
-      this.viewer,
-      this.entities,
-      start,
-      stop,
-      2.1
-    )
-    moveEntity.add(postyionsArrays[3], 50, 10)
-    moveEntity.add(postyionsArrays[4], 15, 5)
-    moveEntity = new MoveEntityCollectionRow(
-      this.viewer,
-      this.entities,
-      start,
-      stop,
-      1.5
-    )
-    moveEntity.add(postyionsArrays[5], 18, 6)
-    moveEntity.add(postyionsArrays[6], 12, 4)
-    moveEntity.add(postyionsArrays[7], 18, 6)
-    moveEntity = new MoveEntityCollectionRow(
-      this.viewer,
-      this.entities,
-      start,
-      stop,
-      1.5
-    )
-    moveEntity.add(postyionsArrays[8], 40, 10)
+    // moveEntity.add(postyionsArrays[0], 5, 2)
+    moveEntity.add(postyionsArrays[1], 5, 1)
+    // moveEntity = new MoveEntityCollectionRow(
+    //   this.viewer,
+    //   this.entities,
+    //   start,
+    //   stop,
+    //   1.1
+    // )
+    // moveEntity.add(postyionsArrays[2], 30, 10)
+    // moveEntity = new MoveEntityCollectionRow(
+    //   this.viewer,
+    //   this.entities,
+    //   start,
+    //   stop,
+    //   2.1
+    // )
+    // moveEntity.add(postyionsArrays[3], 50, 10)
+    // moveEntity.add(postyionsArrays[4], 15, 5)
+    // moveEntity = new MoveEntityCollectionRow(
+    //   this.viewer,
+    //   this.entities,
+    //   start,
+    //   stop,
+    //   1.5
+    // )
+    // moveEntity.add(postyionsArrays[5], 18, 6)
+    // moveEntity.add(postyionsArrays[6], 12, 4)
+    // moveEntity.add(postyionsArrays[7], 18, 6)
+    // moveEntity = new MoveEntityCollectionRow(
+    //   this.viewer,
+    //   this.entities,
+    //   start,
+    //   stop,
+    //   1.5
+    // )
+    // moveEntity.add(postyionsArrays[8], 40, 10)
   }
   addTestEntity1() {
     let viewer = this.viewer
