@@ -21,7 +21,7 @@ export default {
   },
   setup(props) {
     const getViewer = async () => {
-      test()
+      // test()
       MainControl()
     }
 

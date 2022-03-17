@@ -3,6 +3,7 @@ import { DatGuiHelp } from '../datguiHelp.js'
 
 import { ControlA0 } from './ControlA0'
 import { ControlA1 } from './ControlA1'
+import { ControlA3 } from './ControlA3'
 
 function MainControl(params) {
   //--------------------------------------------主控---------------------------------------------------
@@ -19,6 +20,11 @@ function MainControl(params) {
   let gui_0_f0 = gui_0_root.addFolder(otherControlSetting.title)
   DatGuiHelp.openSetting(gui_0_f0, otherControlSetting, 'ControlA0', ControlA0)
   DatGuiHelp.openSetting(gui_0_f0, otherControlSetting, 'ControlA1', ControlA1)
+
+
+   // 新窗口控制
+   let gui_0_f1 = gui_0_root.addFolder(otherControlSetting1.title)
+   DatGuiHelp.openSetting(gui_0_f1, otherControlSetting1, 'ControlA3', ControlA3)
   
 }
 
@@ -30,6 +36,11 @@ let otherControlSetting = {
   title: 'OtherControlSetting',
   ControlA0: false,
   ControlA1: false,
+}
+
+let otherControlSetting1 = {
+  title: 'OtherControlSetting1',
+  ControlA3: false
 }
 
 // --------------------------------------------datgui控制面板---------------------------------------------------

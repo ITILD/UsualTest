@@ -3,8 +3,17 @@ import * as cesiumPlugin from '../../../../../../public/lib/in/cesiumplugin.mjs'
 import { SceneInteraction } from './sceneParam/SceneInteraction.js'
 import { CesiumPrimitivesProvider_CameraCenter2D } from './spatialTree/CesiumPrimitivesProvider_CameraCenter2D.js'
 import { UsualGeoOctree } from './spatialTree/UsualGeoOctree.js'
-
+import { GeojsonMock } from './dataMock/GeojsonMock.js'
+import { MoveEntityCollection } from './Animation/MoveEntityCollection.js'
+import { TetrahedronGeometry } from './CustomGeometry/TetrahedronGeometry.js'
+// TetrahedronGeometry
+// TetrahedronGeometry
 function datGuiControl(guiRoot, controlParams) {
+  let dataSore = {
+
+  }
+
+
   const gui_0_root = guiRoot
   const viewer = controlParams.viewer
   // c添加测试
@@ -18,6 +27,7 @@ function datGuiControl(guiRoot, controlParams) {
   }
   gui_0_root.add(options_0, 'CONTROL')
   let gui_0_f0 = gui_0_root.addFolder(viwerSettingFull.sceneParam.title)
+  // --------------------------------------------场景参数---------------------------------------------------
   // 视角控制
   let cameras = gui_0_f0.add(
     viwerSettingFull.sceneParam,
@@ -185,8 +195,8 @@ function datGuiControl(guiRoot, controlParams) {
     viwerSettingFull.LODBuilding.baimo = value
     if (value) {
       baseLayers.addLayer(viwerSettingFull.LODBuilding.baimoConfig)
-  // 清除鼠标监听
-  handler&&handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
+      // 清除鼠标监听
+      handler && handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
     } else {
       // viwerSettingFull.LODBuilding.damage = false //消除损伤
       baseLayers.layersIdConfig.get(
@@ -197,7 +207,7 @@ function datGuiControl(guiRoot, controlParams) {
   // 损伤变色 damage
   // 下拉框形式选择文案
   // let conditionsTest = []
- 
+
   // let conditionsMax = 50000
   // let conditionsLength = 50000/255
   // for (let index = 0; index < conditionsMax/conditionsLength; index++) {
@@ -223,25 +233,25 @@ function datGuiControl(guiRoot, controlParams) {
         //   material: "${feature['building:id']}",
         // },
         color: {
-          conditions: 
-          // conditionsTest
-          [
-            // objectid 	106887 		106884  
-            ['${objectid} == 106887 ', "color('red')"],
-            ['${objectid} == 106884 ', 'rgb(0, 0, 151)'],
-            // ['${id} > 40000.0 && (${id} < 4000000.0)', "color('red')"],
-            ['true', "color('black')"],
+          conditions:
+            // conditionsTest
+            [
+              // objectid 	106887 		106884  
+              ['${objectid} == 106887 ', "color('red')"],
+              ['${objectid} == 106884 ', 'rgb(0, 0, 151)'],
+              // ['${id} > 40000.0 && (${id} < 4000000.0)', "color('red')"],
+              ['true', "color('black')"],
 
-            // ['${地上面积} > 0 && (${地上面积} < 2000.0)', 'rgb(102, 71, 151)'],
-            // ['${地上面积} > 2000.0 && (${地上面积} < 4000.0)', "color('red')"],
+              // ['${地上面积} > 0 && (${地上面积} < 2000.0)', 'rgb(102, 71, 151)'],
+              // ['${地上面积} > 2000.0 && (${地上面积} < 4000.0)', "color('red')"],
 
 
 
-            // ['${地上面积} > 2000', "color('yellow')"],
-            // ['${地上面积} < 2000', "color('red')"],
-            // ["${地上面积} <= 2000'", "color('green', 0.5)"],
-            // ['true', "color('red')"], // This is the else case
-          ],
+              // ['${地上面积} > 2000', "color('yellow')"],
+              // ['${地上面积} < 2000', "color('red')"],
+              // ["${地上面积} <= 2000'", "color('green', 0.5)"],
+              // ['true', "color('red')"], // This is the else case
+            ],
         },
       })
     } else {
@@ -272,7 +282,280 @@ function datGuiControl(guiRoot, controlParams) {
     }
   })
 
-  // --------------------------------------------图层---------------------------------------------------
+
+
+  // --------------------------------------------动态---------------------------------------------------
+  // 动态房屋
+  let damage_time_unit = "s"
+  let moveEntity
+  let myEntityCollection
+  let gui_0_f5 = gui_0_root.addFolder(viwerSettingFull.Animation.title)
+  // 
+  // let eBuildSimple
+  let eBuildSimple = gui_0_f5.add(viwerSettingFull.Animation, 'eBuildSimple')
+  eBuildSimple.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+      let res = dataSore.buildings
+      myEntityCollection = new Cesium.CustomDataSource('testEntityCollection')
+      viewer.dataSources.add(myEntityCollection)
+      let entities = myEntityCollection.entities
+      // 起始时间
+      // let start = Cesium.JulianDate.fromDate(new Date(2017, 7, 11))//北京时间     8小时差
+      let start = Cesium.JulianDate.fromIso8601(res.features[0].properties.time_start) // TODO 先查询批次 起始时间和最大时间  回调查询数据 直接输入？？
+      // 结束时间
+      let stop = Cesium.JulianDate.fromIso8601(res.features[0].properties.time_end) // TODO 先查询批次 起始时间和最大时间  回调查询数据 直接输入？？
+
+      // 设置始时钟始时间
+      viewer.clock.startTime = start.clone()
+
+      // 设置时钟当前时间
+      viewer.clock.currentTime = start.clone()
+
+      // 设置始终停止时间
+      viewer.clock.stopTime = stop.clone()
+
+      // 时间速率，数字越大时间过的越快
+      viewer.clock.multiplier = 0.5 //TODO 测试 或传值
+
+      // 时间轴
+      viewer.timeline.zoomTo(start, stop)
+      viewer.clock.clockRange = Cesium.ClockRange.CLAMPED; //终止时间终止
+      // 设置时间添加方法
+      let timeAddFun = Cesium.JulianDate.addSeconds;
+      if (damage_time_unit === "d") {
+        timeAddFun = Cesium.JulianDate.addDays;
+      }
+      // debugger TODO displacement_time_unit
+      let timeAddFun_displacement_s = 0.005
+      let timeAddFun_displacement_ms = 0.005 * 1000
+      let amplitudeIncrease = 100
+      moveEntity = new MoveEntityCollection(
+        viewer,
+        entities,
+        start,
+        stop,
+        0.4,
+        timeAddFun,
+        timeAddFun_displacement_s,
+        timeAddFun_displacement_ms,
+        amplitudeIncrease
+      )
+
+
+
+      // 查询单片几何
+      // let dataLength = res.features.length
+      let dataLength = 10
+      for (let index = 0; index < dataLength; index++) {
+        const feature = res.features[index];
+        const floors = feature.properties.floors
+        const height = feature.properties.height * 5 //总高程
+
+        const damage = feature.properties.damage //损伤数据
+        const displacement = feature.properties.displacement //时程数据
+        if (!displacement) { //时程数据不存在
+          continue
+        }
+
+        const time_start = feature.properties.time_start //损伤数据
+        const bsm = feature.properties.bsm
+
+        const geometry = JSON.parse(feature.geometry)
+
+        let coordinatesArrays = geometry.coordinates[0][0].flat() //降维
+        let postyionsArrays = Cesium.Cartesian3.fromDegreesArray(coordinatesArrays);
+
+        // moveEntity.add(postyionsArrays, height / floors, floors, bsm, damage, displacement, time_start, height)
+        moveEntity.add(postyionsArrays, height / floors, floors, bsm, damage, displacement, time_start, height)
+
+      }
+      // resolve(moveEntity)
+
+    } else {
+
+      moveEntity.removeAll()
+
+    }
+  })
+
+
+  let eBuildMove = gui_0_f5.add(viwerSettingFull.Animation, 'eBuildMove')
+  eBuildMove.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+
+
+    } else {
+
+    }
+  })
+
+
+  // 
+  let gBuildSimple = gui_0_f5.add(viwerSettingFull.Animation, 'gBuildSimple')
+  gBuildSimple.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+      let res = dataSore.buildings
+
+      // 查询单片几何
+      // let dataLength = res.features.length
+      let dataLength = 2
+      for (let index = 0; index < dataLength; index++) {
+        const feature = res.features[index];
+        const floors = feature.properties.floors
+        const height = feature.properties.height //总高程
+
+        const damage = feature.properties.damage //损伤数据
+        const displacement = feature.properties.displacement //时程数据
+        if (!displacement) { //时程数据不存在
+          continue
+        }
+
+        const time_start = feature.properties.time_start //损伤数据
+        const bsm = feature.properties.bsm
+
+        const geometry = JSON.parse(feature.geometry)
+
+        let coordinatesArrays = geometry.coordinates[0][0].flat() //降维
+        let postyionsArrays = Cesium.Cartesian3.fromDegreesArray(coordinatesArrays);
+
+        // moveEntity.add(postyionsArrays, height / floors, floors, bsm, damage, displacement, time_start, height)
+
+
+      }
+
+    } else {
+      moveEntity.removeAll()
+
+    }
+  })
+
+  let gBuildMove = gui_0_f5.add(viwerSettingFull.Animation, 'gBuildMove')
+  gBuildMove.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+    } else {
+
+    }
+  })
+
+
+  // --------------------------------------------仿真数据---------------------------------------------------
+  // 动态房屋
+  let gui_0_f6 = gui_0_root.addFolder(viwerSettingFull.DataMock.title)
+  // 
+  // let eBuildSimple
+  let points = gui_0_f6.add(viwerSettingFull.DataMock, 'points')
+  points.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+    } else {
+
+    }
+  })
+
+
+  let lines = gui_0_f6.add(viwerSettingFull.DataMock, 'lines')
+  lines.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+    } else {
+
+    }
+  })
+
+
+  // 
+  let polygons = gui_0_f6.add(viwerSettingFull.DataMock, 'polygons')
+  polygons.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+    } else {
+
+    }
+  })
+
+  let buildings = gui_0_f6.add(viwerSettingFull.DataMock, 'buildings')
+  buildings.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+      dataSore.buildings = GeojsonMock.testBuilding()
+      // console.log(dataSore)
+
+
+
+    } else {
+      dataSore.buildings = null
+    }
+  })
+
+
+
+  // --------------------------------------------自定义几何体---------------------------------------------------
+  // 动态房屋
+  let gui_0_f7 = gui_0_root.addFolder(viwerSettingFull.CustomGeometry.title)
+  // 
+  // let eBuildSimple
+  let Tetrahedron = gui_0_f7.add(viwerSettingFull.CustomGeometry, 'Tetrahedron')
+  Tetrahedron.onChange((value) => {
+    console.log('onChange:' + value)
+    if (value) {
+
+
+      let ellipsoid = viewer.scene.globe.ellipsoid;
+
+
+      //模型矩阵
+      let tempMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(ellipsoid.cartographicToCartesian(
+        Cesium.Cartographic.fromDegrees(-100.0, 40.0)
+      ))
+      // debugger
+      let tempMatrix1 = Cesium.Matrix4.multiplyByTranslation(
+        tempMatrix,
+        new Cesium.Cartesian3(0.0, 0.0, 200000.0),new Cesium.Matrix4())
+      debugger
+      let modelMatrix = Cesium.Matrix4.multiplyByUniformScale(tempMatrix1,
+        500000.0,new Cesium.Matrix4() );
+        debugger
+      //四面体的实例
+
+      let instance = new Cesium.GeometryInstance({
+        geometry: TetrahedronGeometry(),
+        modelMatrix: modelMatrix,
+        attributes: {
+          color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE) //白色
+        }
+      });
+
+      //加入场景
+      viewer.scene.primitives.add(new Cesium.Primitive({
+        geometryInstances: instance,
+        appearance: new Cesium.PerInstanceColorAppearance({
+          flat: true,
+          translucent: false
+        })
+      }));
+
+
+
+
+
+    } else {
+
+    }
+  })
+
+
+
   // --------------------------------------------图层---------------------------------------------------
 }
 

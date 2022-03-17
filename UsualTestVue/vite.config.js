@@ -21,6 +21,7 @@ export default ({ mode }) => {
       vitePluginCesium(),
 
     ],
+  
     define: {
 
       // 'process.env': {}
@@ -29,6 +30,7 @@ export default ({ mode }) => {
       port: process.env.VITE_PORT,
     },
     build: {
+      // 拆分块
       rollupOptions: {
         output: {
           manualChunks(id) {

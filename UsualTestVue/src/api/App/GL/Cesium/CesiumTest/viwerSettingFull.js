@@ -89,6 +89,27 @@ let viwerSettingFull = {
     damage:false,//损伤
     dynamicHole:false,
     rockBuildiong:false//动态房屋
+  },
+  // --------------------------------------------动态房屋---------------------------------------------------
+  Animation:{
+    title: 'Animation',
+    eBuildSimple: false,
+    eBuildMove:false,
+    gBuildSimple: false,
+    gBuildMove: false,
+  },
+  // --------------------------------------------数据模拟---------------------------------------------------
+  DataMock:{
+    title: 'DataMock',
+    points: false,
+    lines:false,
+    polygons: false,
+    buildings: false,
+  },
+  // --------------------------------------------自定义几何体---------------------------------------------------
+  CustomGeometry:{
+    title: '自定义几何体',
+    Tetrahedron: false,
   }
 
 }

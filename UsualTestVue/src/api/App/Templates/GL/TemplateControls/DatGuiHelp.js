@@ -7,7 +7,7 @@ class DatGuiHelp {
     console.log('DatGuiHelp')
   }
   /**
-   * 
+   * 创建
    * @param {*} datGuiDOM '#datGui'
    * @param {*} ControlName 'MainControl'
    * @param {*} top 2
@@ -36,8 +36,7 @@ class DatGuiHelp {
    * @param {*} newControl 
    */
   static openSetting(gui_0_f0, otherControlSetting, openString, newControl) {
-    let newControl_open = gui_0_f0.add(otherControlSetting, openString),
-      thisNewControl
+    let newControl_open = gui_0_f0.add(otherControlSetting, openString),thisNewControl
     newControl_open.onChange(value => { value ? thisNewControl = newControl() : thisNewControl.destroy() })
   }
 }

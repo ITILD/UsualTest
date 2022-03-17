@@ -119,6 +119,7 @@ function datGuiControl(guiRoot, controlParams) {
     [fileHandle] = await window.showOpenFilePicker();
 
     if (fileHandle.kind === "file") {
+      
       // run file code
       console.log(fileHandle);
     } else if (fileHandle.kind === "directory") {

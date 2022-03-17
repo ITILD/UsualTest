@@ -212,7 +212,7 @@ class CesiumPrimitivesProvider_CameraCenter2D {
       geometryInstances: [greenPolygonInstance], //绑定一起渲染，效率更高
       appearance: new Cesium.PerInstanceColorAppearance({
         closed: true,
-        translucent: false,
+        translucent: true,//启用半透明
       }),
     });
     viewer.scene.primitives.add(primitiveTile);
