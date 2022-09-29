@@ -3,7 +3,7 @@ import * as cesiumPlugin from '../../../../../../public/lib/in/cesiumplugin.mjs'
 import { SceneInteraction } from './sceneParam/SceneInteraction.js'
 import { CesiumPrimitivesProvider_CameraCenter2D } from './spatialTree/CesiumPrimitivesProvider_CameraCenter2D.js'
 import { UsualGeoOctree } from './spatialTree/UsualGeoOctree.js'
-import { GeojsonMock } from './dataMock/GeojsonMock.js'
+// import { GeojsonMock } from './dataMock/GeojsonMock.js'
 import { MoveEntityCollection } from './Animation/MoveEntityCollection.js'
 import { TetrahedronGeometry } from './CustomGeometry/TetrahedronGeometry.js'
 // TetrahedronGeometry
